@@ -1,0 +1,4 @@
+<!--miniprogram/pages/editUserInfo/weixin/weixin.wxml-->
+<input type="text" value="{{ weixinNumber }}" bindinput="handleText" />
+<button bindtap="handleBtn">设置</button>
+

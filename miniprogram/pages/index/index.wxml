@@ -1,0 +1,37 @@
+<!--miniprogram/pages/index/index.wxml-->
+<!-- 引入wxs -->
+<!-- 自定义属性data-current 按点赞数排序 按时间排序 -->
+     <!-- 自定义属性data-id存每条数据的_id 点击图片跳转至详情页 -->
+<wxs src="../../utils/wordSplit.wxs" module="m1" />
+<wxs src="../../utils/unitFormat.wxs" module="m2" />
+
+<view class="index">
+  
+  <swiper class="index-swiper" indicator-dots="{{true}}"
+    autoplay="{{true}}" circular="{{true}}">
+    <block wx:for="{{imgUrls}}" wx:key="index">
+      <swiper-item>
+        <image src="{{item}}" class="slide-image" />
+      </swiper-item>
+    </block>
+  </swiper>
+
+  <view class="index-tab">
+    <view class="{{ current == 'links' ? 'active' : '' }}" data-current="links" bindtap="handleCurrent">推荐</view>
+    <view class="{{ current == 'time' ? 'active' : '' }}" data-current="time" bindtap="handleCurrent">最新</view>
+  </view>
+
+  <view class="index-list">
+    <view class="index-list-item" wx:for="{{listData}}" wx:key="index">
+      <image mode="aspectFill" src="{{item.userPhoto}}" data-id="{{item._id}}" bindtap="handleDetail" />
+      <view class="index-list-text">
+        <text>{{m1.wordSplit(item.nickName)}}</text>
+        <text data-id="{{item._id}}" bindtap="handleLinks">
+          <text class="iconfont icondianzan"></text>
+          <text>{{m2.unitFormat(item.links)}}</text>
+        </text>
+      </view>
+    </view>
+  </view>
+
+</view>
